@@ -1,0 +1,6 @@
+# Le repo ne suit que la home. Les POC vivent dans leurs sous-dossiers
+# sur le serveur et ne doivent jamais apparaître dans git status / git pull.
+/*
+!/index.html
+!/README.md
+!/.gitignore
