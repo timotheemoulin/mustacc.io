@@ -15,4 +15,4 @@ Chaque projet vit dans son propre sous-dossier et s'ouvre dans un nouvel onglet 
 | Chemin | Projet | Source |
 |---|---|---|
 | `/magellan/` | Vénus en 3D depuis les données radar Magellan | [magellan-venus](https://github.com/timotheemoulin/magellan-venus) |
-| `/mont-destin/` | Scrollytelling de la Communauté à travers la Terre du Milieu | fichier unique |
+| `/mont-destin/` | Scrollytelling de la Communauté à travers la Terre du Milieu | [terredumilieu](https://github.com/timotheemoulin/terredumilieu) |
