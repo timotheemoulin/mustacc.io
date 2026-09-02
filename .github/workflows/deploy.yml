@@ -2,7 +2,7 @@ name: Déploiement Infomaniak
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 jobs:
@@ -19,6 +19,6 @@ jobs:
           script: |
             set -e
             cd ~/sites/mustacc.io
-            git fetch origin main
-            git reset --hard origin/main
+            git fetch origin master
+            git reset --hard origin/master
             echo "Déployé : $(git log -1 --format='%h %s')"
