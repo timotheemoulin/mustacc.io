@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: prod
     steps:
       - name: git pull sur le serveur
         uses: appleboy/ssh-action@v1
@@ -15,7 +16,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT != '' && secrets.SSH_PORT || '22' }}
+          port: ${{ secrets.SSH_PORT || 22 }}
           script: |
             set -e
             cd ~/sites/mustacc.io
