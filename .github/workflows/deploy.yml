@@ -1,0 +1,24 @@
+name: Déploiement Infomaniak
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git pull sur le serveur
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script: |
+            set -e
+            cd ~/sites/mustacc.io
+            git fetch origin main
+            git reset --hard origin/main
+            echo "Déployé : $(git log -1 --format='%h %s')"
