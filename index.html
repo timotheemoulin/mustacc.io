@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>mustacc.io</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..600;1,8..60,300..600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#1a110c;
+    --ground-2:#22170f;
+    --line:#3a2a1f;
+    --line-soft:#2c1f17;
+    --crema:#f0e2c4;
+    --crema-2:#c9b896;
+    --muted:#8f7f66;
+    --copper:#d9863b;
+    --copper-deep:#a85a1d;
+    --steel:#95a7b3;
+    --display:"Bricolage Grotesque",Georgia,serif;
+    --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{color-scheme:dark}
+  body{
+    margin:0;background:var(--ground);color:var(--crema);
+    font-family:var(--body);font-size:18px;line-height:1.55;
+    font-optical-sizing:auto;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--copper);outline-offset:3px;border-radius:2px}
+  ::selection{background:var(--copper);color:var(--ground)}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+
+  /* ---------- header ---------- */
+  header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.01em}
+  .brand svg{width:34px;height:34px}
+  .brand .tld{color:var(--copper)}
+  nav ul{list-style:none;display:flex;gap:28px;margin:0;padding:0;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
+  nav a{text-decoration:none;color:var(--crema-2)}
+  nav a:hover{color:var(--copper)}
+  @media (max-width:640px){nav ul{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:clamp(56px,9vw,120px) 0 clamp(48px,7vw,96px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(32px,6vw,96px);align-items:center;border-bottom:1px solid var(--line-soft)}
+  @media (max-width:800px){.hero{grid-template-columns:1fr;gap:40px}.hero .mark{order:-1;justify-self:start}}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--copper);margin:0 0 20px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";display:inline-block;width:28px;height:1px;background:var(--copper)}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(44px,7.4vw,96px);line-height:.95;letter-spacing:-.035em;margin:0;text-wrap:balance;font-variation-settings:"opsz" 96}
+  h1 .tld{color:var(--copper);font-weight:300;letter-spacing:-.02em}
+  .lede{font-size:clamp(19px,1.6vw,23px);max-width:34em;color:var(--crema-2);margin:28px 0 0;font-weight:300}
+  .lede em{font-style:italic;color:var(--crema)}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px;align-items:center}
+  .btn{font-family:var(--mono);font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;padding:13px 20px;border:1px solid var(--copper);color:var(--ground);background:var(--copper);border-radius:2px;transition:background .15s,transform .15s}
+  .btn:hover{background:#e8975a}
+  .btn.ghost{background:transparent;color:var(--crema);border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--copper);color:var(--copper)}
+  .mark{width:clamp(200px,26vw,320px);height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.45))}
+  .mark .steam{stroke-dasharray:60;stroke-dashoffset:0;animation:steam 4s ease-in-out infinite}
+  .mark .steam.s2{animation-delay:1.3s}
+  @keyframes steam{0%,100%{opacity:.35;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+  @media (prefers-reduced-motion:reduce){.mark .steam{animation:none}}
+
+  /* ---------- section titles ---------- */
+  section{padding:clamp(56px,7vw,96px) 0;border-bottom:1px solid var(--line-soft)}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+  h2{font-family:var(--display);font-weight:700;font-size:clamp(30px,3.6vw,46px);letter-spacing:-.03em;margin:0;line-height:1.05;text-wrap:balance}
+  .sec-note{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+
+  /* ---------- menu (projects) ---------- */
+  .menu{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+  .menu li{border-bottom:1px solid var(--line)}
+  .menu a{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name status" "desc desc" "tags tags";gap:6px 24px;padding:26px 0;text-decoration:none;color:inherit;transition:padding-left .2s}
+  @media (min-width:760px){.menu a{grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) auto;grid-template-areas:"name desc status" "tags desc status";gap:8px 40px;padding:30px 0}}
+  .menu a:hover{padding-left:12px}
+  .menu a:hover .name{color:var(--copper)}
+  .name{grid-area:name;font-family:var(--display);font-weight:700;font-size:clamp(21px,2vw,26px);letter-spacing:-.02em;line-height:1.1;transition:color .15s}
+  .desc{grid-area:desc;color:var(--crema-2);font-size:17px;margin:0;max-width:52ch}
+  .tags{grid-area:tags;display:flex;gap:8px;flex-wrap:wrap;align-self:end}
+  .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);border:1px solid var(--line);padding:3px 8px;border-radius:2px}
+  .status{grid-area:status;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;align-self:start;color:var(--crema-2)}
+  .status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--muted)}
+  .status.live::before{background:#7fb069}
+  .status.wip::before{background:var(--copper)}
+  .status.lab::before{background:var(--steel)}
+
+  /* ---------- about ---------- */
+  .about{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:start}
+  @media (max-width:800px){.about{grid-template-columns:1fr}}
+  .about p{margin:0 0 1.2em;max-width:60ch;color:var(--crema-2)}
+  .about p:first-of-type{font-size:22px;color:var(--crema);font-weight:300}
+  .recipe{border:1px solid var(--line);padding:28px;background:var(--ground-2);font-family:var(--mono);font-size:13px;line-height:1.7}
+  .recipe h3{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--copper);margin:0 0 16px}
+  .recipe dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px}
+  .recipe dt{color:var(--muted)}
+  .recipe dd{margin:0;color:var(--crema)}
+
+  /* ---------- footer ---------- */
+  footer{padding:40px 0 56px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center;font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.03em}
+  footer a{color:var(--crema-2);text-decoration:none}
+  footer a:hover{color:var(--copper)}
+  footer .links{display:flex;gap:22px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="0 0 120 120">
+      <!-- steam -->
+      <path class="steam s1" d="M48 40c-5-6 5-10 0-17" fill="none" stroke="var(--crema-2)" stroke-width="3.2" stroke-linecap="round"/>
+      <path class="steam s2" d="M66 40c-5-6 5-10 0-17" fill="none" stroke="var(--crema-2)" stroke-width="3.2" stroke-linecap="round"/>
+      <!-- handle -->
+      <path d="M89 62c14 0 20 6 20 13s-6 13-20 13" fill="none" stroke="var(--crema)" stroke-width="6" stroke-linecap="round"/>
+      <!-- cup -->
+      <path d="M26 52h68l-6.5 38c-.8 4.6-4.6 8-9.3 8H41.8c-4.7 0-8.5-3.4-9.3-8Z" fill="var(--crema)"/>
+      <!-- saucer -->
+      <path d="M18 108h84" stroke="var(--crema)" stroke-width="6" stroke-linecap="round"/>
+      <!-- moustache -->
+      <g transform="translate(26 57) scale(0.34)">
+        <path d="M100 28C112 18 134 17 154 25C172 32 186 30 195 8C191 26 181 43 160 52C140 61 112 58 100 50Z" fill="var(--copper)"/>
+        <path d="M100 28C88 18 66 17 46 25C28 32 14 30 5 8C9 26 19 43 40 52C60 61 88 58 100 50Z" fill="var(--copper)"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="mustacc.io, accueil">
+      <svg aria-hidden="true"><use href="#logo"/></svg>
+      <span>mustacc<span class="tld">.io</span></span>
+    </a>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="#menu">Au menu</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="mailto:tim@mustacc.io">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero" aria-labelledby="h1">
+      <div>
+        <p class="eyebrow">Labo personnel · Sion, Suisse</p>
+        <h1 id="h1">mustacc<span class="tld">.io</span></h1>
+        <p class="lede">Des outils, des recherches, des tests et des POC qui ne tiennent pas dans un tiroir. Servi <em>serré</em>, avec ce qu'il faut de moustache.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#menu">Voir le menu</a>
+          <a class="btn ghost" href="#apropos">C'est quoi, ce nom&nbsp;?</a>
+        </div>
+      </div>
+      <svg class="mark" viewBox="0 0 120 120" role="img" aria-label="Logo mustacc : une tasse d'espresso avec une moustache"><use href="#logo"/></svg>
+    </section>
+
+    <section id="menu" aria-labelledby="h-menu">
+      <div class="sec-head">
+        <h2 id="h-menu">Au menu</h2>
+        <span class="sec-note">2 projets · mis à jour septembre 2026</span>
+      </div>
+      <ul class="menu">
+        <li>
+          <a href="/magellan/" target="_blank" rel="noopener">
+            <span class="name">Magellan</span>
+            <p class="desc">Vénus en 3D dans le navigateur, reconstruite depuis les données radar de la sonde Magellan. Globe interactif, régions zoomables, images SAR et nomenclature IAU. Three.js côté client, Python pour tuiler le modèle d'élévation.</p>
+            <span class="tags"><span class="tag">POC</span><span class="tag">IA</span><span class="tag">Three.js</span><span class="tag">Cartographie</span></span>
+            <span class="status wip">En cours</span>
+          </a>
+        </li>
+        <li>
+          <a href="/mont-destin/" target="_blank" rel="noopener">
+            <span class="name">Mont Destin</span>
+            <p class="desc">Scrollytelling plein écran de la route de la Communauté à travers la Terre du Milieu. Carte SVG animée au scroll, un seul fichier HTML, zéro dépendance.</p>
+            <span class="tags"><span class="tag">POC</span><span class="tag">Front</span><span class="tag">Cartographie</span></span>
+            <span class="status live">En ligne</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="apropos" aria-labelledby="h-about">
+      <div class="sec-head">
+        <h2 id="h-about">Pourquoi mustacc.io</h2>
+      </div>
+      <div class="about">
+        <div>
+          <p>Le petit homme à moustache de Bialetti lève l'index sur des millions de cafetières depuis 1953. Il ne vend rien de compliqué, juste un bon café et l'assurance que ça va marcher. C'est exactement l'esprit ici.</p>
+          <p>mustacc.io rassemble ce que je bricole en dehors des projets clients : des outils qui me font gagner du temps, des expérimentations autour de l'IA, des tests techniques et quelques preuves de concept qui méritent mieux qu'un dossier oublié sur un disque. Rien n'est promis comme produit fini. Certaines choses tournent en production, d'autres sont des brouillons publics.</p>
+          <p>Moi c'est Tim, je fais du web, j'aime le café et les cigares, et j'ai effectivement une moustache.</p>
+        </div>
+        <aside class="recipe" aria-label="Fiche technique">
+          <h3>Fiche technique</h3>
+          <dl>
+            <dt>Dosage</dt><dd>1 idée, 1 week-end, 0 réunion</dd>
+            <dt>Extraction</dt><dd>HTML statique, un fichier par projet</dd>
+            <dt>Mouture</dt><dd>Fichiers autonomes, portables</dd>
+            <dt>Température</dt><dd>Français, anglais, allemand si besoin</dd>
+            <dt>Origine</dt><dd>Sion · Valais · CH</dd>
+            <dt>Contact</dt><dd><a href="mailto:tim@mustacc.io">tim@mustacc.io</a></dd>
+          </dl>
+        </aside>
+      </div>
+    </section>
+  </div>
+
+  <footer class="wrap">
+    <span>© 2026 mustacc.io · Fait à la main, sans capsule.</span>
+    <span class="links">
+      <a href="https://github.com/" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/" rel="noopener">LinkedIn</a>
+      <a href="mailto:tim@mustacc.io">E-mail</a>
+    </span>
+  </footer>
+</main>
+</body>
+</html>
