@@ -76,11 +76,42 @@
   /* ---------- menu (projects) ---------- */
   .menu{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
   .menu li{border-bottom:1px solid var(--line)}
-  .menu a{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name status" "desc desc" "tags tags";gap:6px 24px;padding:26px 0;text-decoration:none;color:inherit;transition:padding-left .2s}
-  @media (min-width:760px){.menu a{grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) auto;grid-template-areas:"name desc status" "tags desc status";gap:8px 40px;padding:30px 0}}
-  .menu a:hover{padding-left:12px}
-  .menu a:hover .name{color:var(--copper)}
-  .name{grid-area:name;font-family:var(--display);font-weight:700;font-size:clamp(21px,2vw,26px);letter-spacing:-.02em;line-height:1.1;transition:color .15s}
+  .menu li{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name status" "desc desc" "tags tags";gap:6px 24px;padding:26px 0;transition:padding-left .2s}
+  @media (min-width:760px){.menu li{grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) auto;grid-template-areas:"name desc status" "tags desc readme";gap:8px 40px;padding:30px 0}}
+  .menu li:hover{padding-left:12px}
+  .menu li:hover .name{color:var(--copper)}
+  .menu .name{grid-area:name;text-decoration:none;color:inherit}
+  /* lien étiré : toute la ligne est cliquable, le bouton readme passe au-dessus */
+  .menu .name::after{content:"";position:absolute;inset:0}
+  .name{font-family:var(--display);font-weight:700;font-size:clamp(21px,2vw,26px);letter-spacing:-.02em;line-height:1.1;transition:color .15s}
+  .readme{grid-area:readme;position:relative;z-index:1;justify-self:end;align-self:end;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--crema-2);background:transparent;border:1px solid var(--line);padding:6px 10px;border-radius:2px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:border-color .15s,color .15s}
+  .readme::before{content:"";width:9px;height:11px;border:1.5px solid currentColor;border-radius:1px;box-shadow:inset 0 3px 0 -1.5px currentColor}
+  .readme:hover{border-color:var(--copper);color:var(--copper)}
+  @media (max-width:759px){.menu li{grid-template-areas:"name status" "desc desc" "tags readme"}}
+
+  /* ---------- readme dialog ---------- */
+  dialog.rm{border:1px solid var(--line);background:var(--ground-2);color:var(--crema);padding:0;width:min(720px,calc(100vw - 32px));max-height:min(84vh,900px);border-radius:3px;box-shadow:0 40px 80px rgba(0,0,0,.6)}
+  dialog.rm::backdrop{background:rgba(10,6,3,.72);backdrop-filter:blur(6px)}
+  .rm-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--ground-2)}
+  .rm-head span{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--copper)}
+  .rm-head button{background:none;border:1px solid var(--line);color:var(--crema-2);font-family:var(--mono);font-size:12px;padding:5px 10px;border-radius:2px;cursor:pointer}
+  .rm-head button:hover{border-color:var(--copper);color:var(--copper)}
+  .rm-body{padding:8px 28px 32px;font-size:16.5px;line-height:1.6;color:var(--crema-2);overflow-wrap:anywhere}
+  .rm-body h1,.rm-body h2,.rm-body h3{font-family:var(--display);color:var(--crema);letter-spacing:-.02em;line-height:1.15;margin:1.4em 0 .5em;text-wrap:balance}
+  .rm-body h1{font-size:30px;margin-top:.9em}.rm-body h2{font-size:22px}.rm-body h3{font-size:18px}
+  .rm-body p{margin:0 0 1em;max-width:66ch}
+  .rm-body a{color:var(--copper)}
+  .rm-body code{font-family:var(--mono);font-size:.86em;background:var(--ground);border:1px solid var(--line-soft);padding:1px 5px;border-radius:2px;color:var(--crema)}
+  .rm-body pre{background:var(--ground);border:1px solid var(--line-soft);padding:14px 16px;overflow-x:auto;border-radius:2px;margin:0 0 1em}
+  .rm-body pre code{border:0;padding:0;background:none}
+  .rm-body ul,.rm-body ol{margin:0 0 1em;padding-left:1.4em}
+  .rm-body li{margin:.25em 0}
+  .rm-body table{border-collapse:collapse;width:100%;margin:0 0 1.2em;font-size:15px;display:block;overflow-x:auto}
+  .rm-body th,.rm-body td{border:1px solid var(--line);padding:8px 12px;text-align:left;vertical-align:top}
+  .rm-body th{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .rm-body hr{border:0;border-top:1px solid var(--line);margin:1.5em 0}
+  .rm-body blockquote{margin:0 0 1em;padding-left:14px;border-left:2px solid var(--copper);color:var(--crema-2)}
+  .rm-body .rm-err{font-family:var(--mono);font-size:13px;color:var(--muted)}
   .desc{grid-area:desc;color:var(--crema-2);font-size:17px;margin:0;max-width:52ch}
   .tags{grid-area:tags;display:flex;gap:8px;flex-wrap:wrap;align-self:end}
   .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);border:1px solid var(--line);padding:3px 8px;border-radius:2px}
@@ -169,20 +200,18 @@
       </div>
       <ul class="menu">
         <li>
-          <a href="/magellan/" target="_blank" rel="noopener">
-            <span class="name">Magellan</span>
-            <p class="desc">Vénus en 3D dans le navigateur, reconstruite depuis les données radar de la sonde Magellan. Globe interactif, régions zoomables, images SAR et nomenclature IAU. Three.js côté client, Python pour tuiler le modèle d'élévation.</p>
-            <span class="tags"><span class="tag">POC</span><span class="tag">IA</span><span class="tag">Three.js</span><span class="tag">Cartographie</span></span>
-            <span class="status wip">En cours</span>
-          </a>
+          <a class="name" href="/magellan/" target="_blank" rel="noopener">Magellan</a>
+          <p class="desc">Vénus en 3D dans le navigateur, reconstruite depuis les données radar de la sonde Magellan. Globe interactif, régions zoomables, images SAR et nomenclature IAU. Three.js côté client, Python pour tuiler le modèle d'élévation.</p>
+          <span class="tags"><span class="tag">POC</span><span class="tag">IA</span><span class="tag">Three.js</span><span class="tag">Cartographie</span></span>
+          <span class="status wip">En cours</span>
+          <button class="readme" type="button" data-title="Magellan" data-src="/magellan/README.md" data-alt="https://raw.githubusercontent.com/timotheemoulin/magellan-venus/main/README.md">Readme</button>
         </li>
         <li>
-          <a href="/mont-destin/" target="_blank" rel="noopener">
-            <span class="name">Mont Destin</span>
-            <p class="desc">Scrollytelling plein écran de la route de la Communauté à travers la Terre du Milieu. Carte SVG animée au scroll, un seul fichier HTML, zéro dépendance.</p>
-            <span class="tags"><span class="tag">POC</span><span class="tag">Front</span><span class="tag">Cartographie</span></span>
-            <span class="status live">En ligne</span>
-          </a>
+          <a class="name" href="/mont-destin/" target="_blank" rel="noopener">Mont Destin</a>
+          <p class="desc">Scrollytelling plein écran de la route de la Communauté à travers la Terre du Milieu. Carte SVG animée au scroll, un seul fichier HTML, zéro dépendance.</p>
+          <span class="tags"><span class="tag">POC</span><span class="tag">Front</span><span class="tag">Cartographie</span></span>
+          <span class="status live">En ligne</span>
+          <button class="readme" type="button" data-title="Mont Destin" data-src="/mont-destin/README.md">Readme</button>
         </li>
       </ul>
     </section>
@@ -220,6 +249,66 @@
       <a href="mailto:tim@mustacc.io">E-mail</a>
     </span>
   </footer>
+
+<dialog class="rm" id="rm" aria-labelledby="rm-title">
+  <div class="rm-head"><span id="rm-title">Readme</span><button type="button" id="rm-close" aria-label="Fermer">Fermer · Esc</button></div>
+  <div class="rm-body" id="rm-body"></div>
+</dialog>
+
+<script>
+(function(){
+  const dlg=document.getElementById('rm'), body=document.getElementById('rm-body'), title=document.getElementById('rm-title');
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+  /* mini markdown : titres, paragraphes, listes, tableaux, code, gras/italique, liens */
+  function inline(t){
+    t=esc(t);
+    t=t.replace(/`([^`]+)`/g,'<code>$1</code>');
+    t=t.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+    t=t.replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<em>$2</em>');
+    t=t.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,(m,a,h)=>/^(https?:|\/|#|mailto:)/.test(h)?`<a href="${h}" target="_blank" rel="noopener">${a}</a>`:a);
+    return t;
+  }
+  function render(md){
+    const lines=md.replace(/\r/g,'').split('\n'); let out='',i=0;
+    while(i<lines.length){
+      let l=lines[i];
+      if(/^```/.test(l)){ let c=[];i++; while(i<lines.length&&!/^```/.test(lines[i])) c.push(lines[i++]); i++; out+=`<pre><code>${esc(c.join('\n'))}</code></pre>`; continue; }
+      if(/^\s*$/.test(l)){i++;continue;}
+      const h=l.match(/^(#{1,6})\s+(.*)/); if(h){out+=`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`;i++;continue;}
+      if(/^(-{3,}|\*{3,})\s*$/.test(l)){out+='<hr>';i++;continue;}
+      if(/^\|/.test(l)&&i+1<lines.length&&/^\|?\s*:?-{2,}/.test(lines[i+1])){
+        const cells=r=>r.replace(/^\||\|$/g,'').split('|').map(c=>c.trim());
+        out+='<table><thead><tr>'+cells(l).map(c=>`<th>${inline(c)}</th>`).join('')+'</tr></thead><tbody>'; i+=2;
+        while(i<lines.length&&/^\|/.test(lines[i])){out+='<tr>'+cells(lines[i]).map(c=>`<td>${inline(c)}</td>`).join('')+'</tr>';i++;}
+        out+='</tbody></table>'; continue;
+      }
+      if(/^\s*[-*+]\s+/.test(l)){out+='<ul>'; while(i<lines.length&&/^\s*[-*+]\s+/.test(lines[i])){out+=`<li>${inline(lines[i].replace(/^\s*[-*+]\s+/,''))}</li>`;i++;} out+='</ul>';continue;}
+      if(/^\s*\d+\.\s+/.test(l)){out+='<ol>'; while(i<lines.length&&/^\s*\d+\.\s+/.test(lines[i])){out+=`<li>${inline(lines[i].replace(/^\s*\d+\.\s+/,''))}</li>`;i++;} out+='</ol>';continue;}
+      if(/^>\s?/.test(l)){let q=[]; while(i<lines.length&&/^>\s?/.test(lines[i])) q.push(lines[i++].replace(/^>\s?/,'')); out+=`<blockquote><p>${inline(q.join(' '))}</p></blockquote>`;continue;}
+      let p=[]; while(i<lines.length&&!/^\s*$/.test(lines[i])&&!/^(#{1,6}\s|```|\||\s*[-*+]\s|\s*\d+\.\s|>)/.test(lines[i])) p.push(lines[i++]);
+      if(!p.length){p.push(l);i++;}
+      out+=`<p>${inline(p.join(' '))}</p>`;
+    }
+    return out;
+  }
+  async function load(srcs){
+    for(const src of srcs){ try{ const r=await fetch(src,{cache:'no-store'}); if(r.ok) return await r.text(); }catch(e){} }
+    throw new Error('introuvable');
+  }
+  document.querySelectorAll('.readme').forEach(btn=>{
+    btn.addEventListener('click',async()=>{
+      title.textContent='Readme · '+btn.dataset.title;
+      body.innerHTML='<p class="rm-err">Chargement…</p>';
+      dlg.showModal(); dlg.scrollTop=0;
+      try{ body.innerHTML=render(await load([btn.dataset.src,btn.dataset.alt].filter(Boolean))); }
+      catch(e){ body.innerHTML='<p class="rm-err">Pas de README.md trouvé pour ce projet.</p>'; }
+    });
+  });
+  document.getElementById('rm-close').addEventListener('click',()=>dlg.close());
+  dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
+})();
+</script>
 </main>
 </body>
 </html>
